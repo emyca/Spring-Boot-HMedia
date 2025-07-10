@@ -19,6 +19,8 @@ public class Product extends RepresentationModel<Product> {
     private long id;
     @Column(name = "name")
     private String name;
+    @Column(name = "measure")
+    private String measure;
     @Column(name = "stock")
     private double stock;
 }
