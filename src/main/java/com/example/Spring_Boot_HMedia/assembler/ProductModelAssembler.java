@@ -22,6 +22,9 @@ public class ProductModelAssembler implements
         model.add(linkTo(methodOn(ProductController.class)
                 .getAll()).withRel(IanaLinkRelations.COLLECTION));
 
+        model.add(linkTo(methodOn(ProductController.class)
+                .getById(product.getId())).withSelfRel());
+
         return model;
     }
 
