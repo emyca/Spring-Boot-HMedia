@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -35,6 +37,18 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findById(long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Product updateById(long id, ProductDtoRequest request) {
+        Optional<Product> optional = repository.findById(id);
+        if (optional.isPresent()) {
+            Product productToUpdate =
+                    mapper.dtoUpdateToEntity(id, request,
+                            optional.get());
+            repository.save(productToUpdate);
+        }
         return repository.findById(id).orElse(null);
     }
 
