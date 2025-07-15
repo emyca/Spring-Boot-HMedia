@@ -11,4 +11,5 @@ public interface ProductService {
     Product save(ProductDtoRequest request);
     List<Product> findAll();
     Product findById(long id);
+    Product updateById(long id, ProductDtoRequest request);
 }
