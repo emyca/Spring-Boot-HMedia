@@ -7,6 +7,7 @@ import com.example.Spring_Boot_HMedia.service.ProductService;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,5 +52,12 @@ public class ProductController {
     @GetMapping("/{id}")
     public EntityModel<Product> getById(@PathVariable("id") long id) {
         return assembler.toModel(service.findById(id));
+    }
+
+    @PutMapping("/{id}")
+    public HttpEntity<EntityModel<Product>> updateById(
+            @PathVariable("id") long id, @RequestBody ProductDtoRequest request) {
+        Product product = service.updateById(id, request);
+        return new ResponseEntity<>(assembler.toModel(product), HttpStatus.OK);
     }
 }
