@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -49,6 +48,12 @@ public class ProductServiceImpl implements ProductService {
                             optional.get());
             repository.save(productToUpdate);
         }
+        return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Product accept(double quota, long id) {
+        repository.accept(quota, id);
         return repository.findById(id).orElse(null);
     }
 
