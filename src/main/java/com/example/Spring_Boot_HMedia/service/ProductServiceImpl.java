@@ -62,4 +62,9 @@ public class ProductServiceImpl implements ProductService {
         repository.ship(quota, id);
         return repository.findById(id).orElse(null);
     }
+
+    @Override
+    public void deleteById(long id) {
+        repository.deleteById(id);
+    }
 }
