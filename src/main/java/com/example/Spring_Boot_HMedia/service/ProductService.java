@@ -12,4 +12,5 @@ public interface ProductService {
     List<Product> findAll();
     Product findById(long id);
     Product updateById(long id, ProductDtoRequest request);
+    Product accept(double quota, long id);
 }
