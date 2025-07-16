@@ -75,4 +75,10 @@ public class ProductController {
         Product product = service.ship(quota.getQuota(), id);
         return new ResponseEntity<>(assembler.toModel(product), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable("id") long id) {
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
