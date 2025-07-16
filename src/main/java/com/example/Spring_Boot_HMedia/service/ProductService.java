@@ -14,4 +14,5 @@ public interface ProductService {
     Product updateById(long id, ProductDtoRequest request);
     Product accept(double quota, long id);
     Product ship(double quota, long id);
+    void deleteById(long id);
 }
