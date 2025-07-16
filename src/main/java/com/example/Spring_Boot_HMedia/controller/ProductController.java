@@ -68,4 +68,11 @@ public class ProductController {
         Product product = service.accept(quota.getQuota(), id);
         return new ResponseEntity<>(assembler.toModel(product), HttpStatus.OK);
     }
+
+    @PatchMapping("/{id}/shipments")
+    public HttpEntity<EntityModel<Product>> ship(
+            @PathVariable("id") long id, @RequestBody Quota quota) {
+        Product product = service.ship(quota.getQuota(), id);
+        return new ResponseEntity<>(assembler.toModel(product), HttpStatus.OK);
+    }
 }
