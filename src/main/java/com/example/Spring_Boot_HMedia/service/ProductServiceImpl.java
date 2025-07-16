@@ -57,4 +57,9 @@ public class ProductServiceImpl implements ProductService {
         return repository.findById(id).orElse(null);
     }
 
+    @Override
+    public Product ship(double quota, long id) {
+        repository.ship(quota, id);
+        return repository.findById(id).orElse(null);
+    }
 }
