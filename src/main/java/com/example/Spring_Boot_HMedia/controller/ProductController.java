@@ -4,6 +4,7 @@ import com.example.Spring_Boot_HMedia.assembler.ProductModelAssembler;
 import com.example.Spring_Boot_HMedia.dto.ProductDtoRequest;
 import com.example.Spring_Boot_HMedia.entity.Product;
 import com.example.Spring_Boot_HMedia.service.ProductService;
+import com.example.Spring_Boot_HMedia.vo.Quota;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpEntity;
@@ -58,6 +59,13 @@ public class ProductController {
     public HttpEntity<EntityModel<Product>> updateById(
             @PathVariable("id") long id, @RequestBody ProductDtoRequest request) {
         Product product = service.updateById(id, request);
+        return new ResponseEntity<>(assembler.toModel(product), HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}/accepts")
+    public HttpEntity<EntityModel<Product>> accept(
+            @PathVariable("id") long id, @RequestBody Quota quota) {
+        Product product = service.accept(quota.getQuota(), id);
         return new ResponseEntity<>(assembler.toModel(product), HttpStatus.OK);
     }
 }
