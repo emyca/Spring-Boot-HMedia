@@ -235,4 +235,6 @@ with H2 console.
 * https://en.wikipedia.org/wiki/Hypermedia
 * https://spring.io/projects/spring-hateoas
 * https://www.postman.com/
+* https://martinfowler.com/articles/richardsonMaturityModel.html
+* https://stateless.group/hal_specification.html
 
