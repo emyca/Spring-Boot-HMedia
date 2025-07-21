@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductDtoRequest {
-    private long id;
+    private Long id;
     private String name;
     private String measure;
     private double stock;
