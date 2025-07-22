@@ -138,4 +138,48 @@ class ProductServiceImplTest {
         assertNull(result);
     }
 
+    @Test
+    @DisplayName("Increase item quota by item id.")
+    public void givenQuota_whenAccept_thenIncreaseItemQuota() {
+        // Given
+        double quota = 8;
+        long id = 1L;
+        Product savedProduct = new Product(id, "banana", "kg", 15);
+        Product updatedProduct = new Product(id, "banana", "kg", 23);
+        // Mocks repository and service methods calls
+        when(repository.findById(id)).thenReturn(Optional.of(savedProduct));
+        var _savedProduct = service.findById(id);
+        willDoNothing().given(repository).accept(quota, id);
+        when(repository.findById(id)).thenReturn(Optional.of(updatedProduct));
+        var _updatedProduct = service.accept(quota, id);
+        // Then
+        double quotaDelta = _updatedProduct.getStock() - _savedProduct.getStock();
+        // Asserts/verify that mocked method call has been invoked
+        verify(repository, times(1)).accept(quota, id);
+        // Asserts the increasing delta is correct
+        assertEquals(quota, quotaDelta);
+    }
+
+    @Test
+    @DisplayName("Decrease item quota by item id.")
+    public void givenQuota_whenShip_thenDecreaseItemQuota() {
+        // Given
+        double quota = 4;
+        long id = 1L;
+        Product savedProduct = new Product(id, "banana", "kg", 15);
+        Product updatedProduct = new Product(id, "banana", "kg", 11);
+        // Mocks repository and service methods calls
+        when(repository.findById(id)).thenReturn(Optional.of(savedProduct));
+        var _savedProduct = service.findById(id);
+        willDoNothing().given(repository).ship(quota, id);
+        when(repository.findById(id)).thenReturn(Optional.of(updatedProduct));
+        var _updatedProduct = service.ship(quota, id);
+        // Then
+        double quotaDelta = _savedProduct.getStock() - _updatedProduct.getStock();
+        // Asserts/verify that mocked method call has been invoked
+        verify(repository, times(1)).ship(quota, id);
+        // Asserts the decreasing delta is correct
+        assertEquals(quota, quotaDelta);
+    }
+
 }
