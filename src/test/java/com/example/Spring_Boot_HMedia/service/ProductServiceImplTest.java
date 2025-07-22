@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -118,6 +118,24 @@ class ProductServiceImplTest {
         assertNotNull(result);
         // Asserts item to update and item returned are the same
         assertEquals(result, updatedProduct);
+    }
+
+    @Test
+    @DisplayName("Item is null after deleting by id.")
+    public void givenProductId_whenDeleteProduct_thenTheProductIsNull(){
+        // Given
+        long productId = 1L;
+        // Mocks repository method call
+        willDoNothing().given(repository).deleteById(productId);
+        // When
+        // Mocks service method call
+        service.deleteById(productId);
+        var result = service.findById(productId);
+        // Then
+        // Asserts/verify that mocked method call has been invoked
+        verify(repository, times(1)).deleteById(productId);
+        // Asserts that item is null
+        assertNull(result);
     }
 
 }
