@@ -91,4 +91,33 @@ class ProductServiceImplTest {
         assertEquals(mockProduct, result);
     }
 
+    @Test
+    @DisplayName("Gets updated by id product properly.")
+    public void givenGotProductById_whenUpdateById_thenReturnUpdatedProduct() {
+        // Given
+        long productId = 1L;
+        // Mocks request to update item by id
+        ProductDtoRequest productDtoRequest = new ProductDtoRequest(null, "banana", "kg", 27);
+        // Mocks previously saved item to update it
+        Product savedProduct = new Product(productId, "banana", "kg", 15);
+        // Mocks item to update
+        Product productToUpdate = new Product(1L, "banana", "kg", 27);
+        // Mocks updated item
+        Product updatedProduct = new Product(1L, "banana", "kg", 27);
+        // When
+        // Mocks mapper, repository and service methods calls
+        when(repository.findById(productId)).thenReturn(Optional.of(savedProduct));
+        when(mapper.dtoUpdateToEntity(productId, productDtoRequest, savedProduct)).thenReturn(productToUpdate);
+        when(repository.save(productToUpdate)).thenReturn(updatedProduct);
+        when(repository.findById(productId)).thenReturn(Optional.of(updatedProduct));
+        var result = service.updateById(productId, productDtoRequest);
+        // Then
+        // Asserts/verify that mocked method call has been invoked
+        verify(repository, times(1)).save(productToUpdate);
+        // Asserts that item is not null
+        assertNotNull(result);
+        // Asserts item to update and item returned are the same
+        assertEquals(result, updatedProduct);
+    }
+
 }
