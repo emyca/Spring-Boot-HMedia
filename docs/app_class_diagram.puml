@@ -1,0 +1,98 @@
+@startuml
+class com.example.Spring_Boot_HMedia.service.ProductServiceImplTest {
+~ ProductMapper mapper
+~ ProductRepository repository
+~ ProductServiceImpl service
+~ void whenSaveProduct_thenThoseProductReturned()
+~ void givenSavedProducts_whenFetchAll_thenGetAll()
++ void whenGetById_thenProperProductReturned()
++ void givenGotProductById_whenUpdateById_thenReturnUpdatedProduct()
++ void givenProductId_whenDeleteProduct_thenTheProductIsNull()
++ void givenQuota_whenAccept_thenIncreaseItemQuota()
++ void givenQuota_whenShip_thenDecreaseItemQuota()
+}
+
+
+interface com.example.Spring_Boot_HMedia.service.ProductService {
+~ Product save(ProductDtoRequest)
+~ List<Product> findAll()
+~ Product findById(long)
+~ Product updateById(long,ProductDtoRequest)
+~ Product accept(double,long)
+~ Product ship(double,long)
+~ void deleteById(long)
+}
+
+class com.example.Spring_Boot_HMedia.assembler.ProductModelAssembler {
++ EntityModel<Product> toModel(Product)
+}
+
+class com.example.Spring_Boot_HMedia.controller.ProductController {
+- ProductService service
+- ProductModelAssembler assembler
++ HttpEntity<EntityModel<Product>> create(ProductDtoRequest)
++ CollectionModel<EntityModel<Product>> getAll()
++ EntityModel<Product> getById(long)
++ HttpEntity<EntityModel<Product>> updateById(long,ProductDtoRequest)
++ HttpEntity<EntityModel<Product>> accept(long,Quota)
++ HttpEntity<EntityModel<Product>> ship(long,Quota)
++ ResponseEntity<?> deleteById(long)
+}
+
+
+class com.example.Spring_Boot_HMedia.entity.Product {
+- Long id
+- String name
+- String measure
+- double stock
+}
+
+class com.example.Spring_Boot_HMedia.vo.Quota {
+- double quota
+}
+
+class com.example.Spring_Boot_HMedia.HMediaApplicationTests {
+~ void contextLoads()
+}
+
+interface com.example.Spring_Boot_HMedia.repository.ProductRepository {
+~ void accept(double,long)
+~ void ship(double,long)
+}
+
+class com.example.Spring_Boot_HMedia.service.ProductMapper {
++ Product dtoCreateToEntity(ProductDtoRequest)
++ Product dtoUpdateToEntity(Long,ProductDtoRequest,Product)
+}
+
+class com.example.Spring_Boot_HMedia.service.ProductServiceImpl {
+~ ProductMapper mapper
+~ ProductRepository repository
++ Product save(ProductDtoRequest)
++ List<Product> findAll()
++ Product findById(long)
++ Product updateById(long,ProductDtoRequest)
++ Product accept(double,long)
++ Product ship(double,long)
++ void deleteById(long)
+}
+
+
+class com.example.Spring_Boot_HMedia.HMediaApplication {
++ {static} void main(String[])
+}
+
+class com.example.Spring_Boot_HMedia.dto.ProductDtoRequest {
+- Long id
+- String name
+- String measure
+- double stock
+}
+
+
+
+org.springframework.hateoas.server.RepresentationModelAssembler <|.. com.example.Spring_Boot_HMedia.assembler.ProductModelAssembler
+org.springframework.hateoas.RepresentationModel <|-- com.example.Spring_Boot_HMedia.entity.Product
+org.springframework.data.jpa.repository.JpaRepository <|-- com.example.Spring_Boot_HMedia.repository.ProductRepository
+com.example.Spring_Boot_HMedia.service.ProductService <|.. com.example.Spring_Boot_HMedia.service.ProductServiceImpl
+@enduml
