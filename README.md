@@ -8,7 +8,7 @@ and/or educational purposes.
 HATEOAS (Hypermedia As The Engine Of Application State) 
 is a constraint of the REST software architectural style.
 
-### Business case
+### Business case (Context)
 
 Basic manipulations of product (goods) stocks in a warehouse. 
 Accepting and shipment of the products (goods).
@@ -24,7 +24,7 @@ Accepting and shipment of the products (goods).
 * [Lombok.](https://projectlombok.org/)
 
 
-### Manual testing
+### Database
 
 In IDE (IntelliJ IDEA) run
 
@@ -62,7 +62,25 @@ SELECT * FROM PRODUCTS
 Click `Run`. Beneath of the SQL statement section appears table `PRODUCTS`. 
 It's empty for now.
 
-**For REST API testing** we can use Postman.
+Data of the table will be changed after each REST-request fulfilled.
+You can check it to perform above-mentioned `SELECT` query.
+
+
+### REST API
+
+**For REST API testing** you can use [Postman](https://www.postman.com/) as a testing tool.
+
+This REST API allows to manipulate with products data in DB:
+
+| Method  | URL                               | Action                    |
+|---------|-----------------------------------|---------------------------|
+| GET     | `/api/v1/products`                | Get all products list     | 
+| GET     | `/api/v1/products/{id}`           | Get a products by id      |
+| POST    | `/api/v1/products`                | Add new product           |
+| PUT     | `/api/v1/products/{id}`           | Update a product by id    |
+| DELETE  | `/api/v1/products/{id}`           | Delete a product by id    |
+| PATCH   | `/api/v1/products/{id}/accepts`   | Increase product quantity | 
+| PATCH   | `/api/v1/products/{id}/shipments` | Decrease product quantity | 
 
 Let's **get all data**.
 
@@ -227,6 +245,11 @@ DELETE http://localhost:8080/api/v1/products/4
 
 All product (resource) data changes, we **can also see in database table** 
 with H2 console.
+
+
+### Unit-testing
+
+Unit tests of service layer can be found [here](src/test/java/com/example/Spring_Boot_HMedia/service/ProductServiceImplTest.java).
 
 
 ### Resources
