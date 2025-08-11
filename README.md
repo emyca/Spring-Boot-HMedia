@@ -251,6 +251,10 @@ with H2 console.
 
 Unit tests of service layer can be found [here](src/test/java/com/example/Spring_Boot_HMedia/service/ProductServiceImplTest.java).
 
+### UML
+
+UML class-diagram image can be found [here](docs/app_class_diagram.png).
+
 
 ### Resources
 
