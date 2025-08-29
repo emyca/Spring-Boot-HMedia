@@ -8,6 +8,17 @@ and/or educational purposes.
 HATEOAS (Hypermedia As The Engine Of Application State) 
 is a constraint of the REST software architectural style.
 
+**Table of Contents**
+
+* [Business case (Context)](#business-case-context)
+* [Tech Stack](#tech-stack)
+* [Database](#database)
+* [REST API](#rest-api)
+* [Unit-testing](#unit-testing)
+* [UML](#uml)
+* [Resources](#resources)
+
+
 ### Business case (Context)
 
 Basic manipulations of product (goods) stocks in a warehouse. 
