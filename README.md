@@ -14,7 +14,7 @@ Basic manipulations of product (goods) stocks in a warehouse.
 Accepting and shipment of the products (goods).
 
 
-### Techstack
+### Tech Stack
 
 * [Spring Framework.](https://spring.io/)
 * [Spring Data JPA.](https://spring.io/projects/spring-data-jpa)
