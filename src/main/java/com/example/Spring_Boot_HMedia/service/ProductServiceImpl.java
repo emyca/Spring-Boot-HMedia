@@ -2,6 +2,7 @@ package com.example.Spring_Boot_HMedia.service;
 
 import com.example.Spring_Boot_HMedia.dto.ProductDtoRequest;
 import com.example.Spring_Boot_HMedia.entity.Product;
+import com.example.Spring_Boot_HMedia.mapper.ProductMapper;
 import com.example.Spring_Boot_HMedia.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
