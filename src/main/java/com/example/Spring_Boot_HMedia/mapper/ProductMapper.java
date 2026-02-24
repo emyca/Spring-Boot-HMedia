@@ -1,4 +1,4 @@
-package com.example.Spring_Boot_HMedia.service;
+package com.example.Spring_Boot_HMedia.mapper;
 
 import com.example.Spring_Boot_HMedia.dto.ProductDtoRequest;
 import com.example.Spring_Boot_HMedia.entity.Product;
