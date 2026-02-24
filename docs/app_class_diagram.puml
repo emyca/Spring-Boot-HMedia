@@ -1,18 +1,4 @@
 @startuml
-class com.example.Spring_Boot_HMedia.service.ProductServiceImplTest {
-~ ProductMapper mapper
-~ ProductRepository repository
-~ ProductServiceImpl service
-~ void whenSaveProduct_thenThoseProductReturned()
-~ void givenSavedProducts_whenFetchAll_thenGetAll()
-+ void whenGetById_thenProperProductReturned()
-+ void givenGotProductById_whenUpdateById_thenReturnUpdatedProduct()
-+ void givenProductId_whenDeleteProduct_thenTheProductIsNull()
-+ void givenQuota_whenAccept_thenIncreaseItemQuota()
-+ void givenQuota_whenShip_thenDecreaseItemQuota()
-}
-
-
 interface com.example.Spring_Boot_HMedia.service.ProductService {
 ~ Product save(ProductDtoRequest)
 ~ List<Product> findAll()
@@ -40,6 +26,11 @@ class com.example.Spring_Boot_HMedia.controller.ProductController {
 }
 
 
+class com.example.Spring_Boot_HMedia.mapper.ProductMapper {
++ Product dtoCreateToEntity(ProductDtoRequest)
++ Product dtoUpdateToEntity(Long,ProductDtoRequest,Product)
+}
+
 class com.example.Spring_Boot_HMedia.entity.Product {
 - Long id
 - String name
@@ -51,18 +42,9 @@ class com.example.Spring_Boot_HMedia.vo.Quota {
 - double quota
 }
 
-class com.example.Spring_Boot_HMedia.HMediaApplicationTests {
-~ void contextLoads()
-}
-
 interface com.example.Spring_Boot_HMedia.repository.ProductRepository {
 ~ void accept(double,long)
 ~ void ship(double,long)
-}
-
-class com.example.Spring_Boot_HMedia.service.ProductMapper {
-+ Product dtoCreateToEntity(ProductDtoRequest)
-+ Product dtoUpdateToEntity(Long,ProductDtoRequest,Product)
 }
 
 class com.example.Spring_Boot_HMedia.service.ProductServiceImpl {
